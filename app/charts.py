@@ -2,8 +2,10 @@ import matplotlib.pyplot as plt
 
 def generate_bar_chart(name, labels, values):
     fig, ax = plt.subplots()
+    print('=>',labels)
+    print('=>',values)
     ax.bar(labels, values)
-    plt.savefig(f'./img/{name}.png')
+    plt.savefig(f'../img/{name}.png')
     plt.close()
 
 def generate_pie_chart(labels, values):

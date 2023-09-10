@@ -1,25 +1,23 @@
-import read_csv
 import charts
-import utils
+import pandas as pd
 
 
 def plot_country_population(data):
-    country_name = input('country  => ')
+    #country_name = input('country  => ')
+    country_name = 'Colombia'
+    country_df = data[data['Country/Territory'] == country_name]
+    years = list(filter(lambda x:x[:4].isnumeric(),country_df.columns))
+    country_data = country_df[years]
+    print(type(country_data))
 
-    country_data_raw = utils.population_by_country(data, country_name)[0]
-    print(country_data_raw)
-
-    country_data = {key[:4]: value for key, value in country_data_raw.items() if len(key) > 3 and key[:4].isnumeric()}
-
-    country_data = dict(sorted(country_data.items()))
-
-    charts.generate_bar_chart(country_name,country_data.keys(),list(map(lambda x: int(x),country_data.values())))
+    charts.generate_bar_chart(country_name,years, country_data.iloc[0,].values)
 
 def plot_wolrd_population_rate(data):
-    world_rate = {dict['Country/Territory']: dict['World Population Percentage'] for dict in data if dict['Continent'] == 'South America'}
-    charts.generate_pie_chart(labels= world_rate.keys(), values=world_rate.values())
+    world_rate = data[data['Continent'] == 'South America']
+    charts.generate_pie_chart(labels= world_rate['Country/Territory'].values, 
+                              values=world_rate['World Population Percentage'].values)
 
-if __name__ == '__main__':
-    data = read_csv.read_csv('app/data.csv')
-    plot_wolrd_population_rate(data)
+def run():
+    data = pd.read_csv('data.csv')
     plot_country_population(data)
+    #plot_wolrd_population_rate(data)
