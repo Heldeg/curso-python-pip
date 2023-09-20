@@ -3,8 +3,7 @@ import pandas as pd
 
 
 def plot_country_population(data):
-    #country_name = input('country  => ')
-    country_name = 'Colombia'
+    country_name = input('country  => ')
     country_df = data[data['Country/Territory'] == country_name]
     years = list(filter(lambda x:x[:4].isnumeric(),country_df.columns))
     country_data = country_df[years]
