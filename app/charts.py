@@ -5,14 +5,14 @@ def generate_bar_chart(name, labels, values):
     print('=>',labels)
     print('=>',values)
     ax.bar(labels, values)
-    plt.savefig(f'../img/{name}.png')
+    plt.savefig(f'./img/{name}.png')
     plt.close()
 
 def generate_pie_chart(labels, values):
     fig, ax = plt.subplots()
     ax.pie(values,labels = labels)
     ax.axis('equal')
-    plt.savefig('./img/pie.png')
+    plt.savefig('./img/pie_chart.png')
     plt.close()
 
 if __name__ == '__main__':
